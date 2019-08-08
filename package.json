@@ -34,5 +34,8 @@
         "defaultCommandArgs": null,
         "blindCommit": false,
         "commitMessage": null
+    },
+    "dependencies": {
+        "dject-core": "^1.2.1"
     }
 }
