@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const validFilePattern = /(^[^\.]+$)/;
+const invalidFilePattern = /^[\.]{1,2}$/;
 const jsFilePattern = /^.*\.js$/;
 
 function isValidFileName(fileName) {
-    return validFilePattern.test(fileName);
+    return !invalidFilePattern.test(fileName);
 }
 
 function isFileADirectory(filePath) {
@@ -17,9 +17,11 @@ function isAJsFile(filePath) {
 }
 
 function getValidFileNames(baseDir) {
-    return fs
+    const fileNames = fs
         .readdirSync(baseDir)
         .filter(isValidFileName);
+
+    return fileNames;
 }
 
 function getValidPaths(filePath) {
@@ -32,8 +34,10 @@ function getValidPaths(filePath) {
     return [];
 }
 
-function buildFilePath(fileName) {
-    return path.join(baseDir, fileName);
+function buildFilePath(baseDir) {
+    return function (fileName) {
+        return path.join(baseDir, fileName);
+    }
 }
 
 function aggregatePaths(paths, filePath) {
@@ -42,13 +46,13 @@ function aggregatePaths(paths, filePath) {
 
 function getValidFilePaths(baseDir) {
     return getValidFileNames(baseDir)
-        .map(buildFilePath)
+        .map(buildFilePath(baseDir))
         .reduce(aggregatePaths, []);
 
 }
 
 function loadFilePaths(baseDir) {
-    return getValidFilePaths(baseDir, fileNames);
+    return getValidFilePaths(baseDir);
 }
 
 module.exports = {

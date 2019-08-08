@@ -6,12 +6,14 @@ function newContainer() {
     const container = djectContainerFactory();
     const dependencyDirectory = path.join(__dirname, 'dependencies');
     const jsFiles = filepathLoader.loadFilePaths(dependencyDirectory);
-    
-    jsFiles.forEach(function(filePath) {
+
+    jsFiles.forEach(function (filePath) {
         const moduleFactory = require(filePath);
-    
+
         container.register(moduleFactory.name, moduleFactory, moduleFactory.dependencies);
-    });    
+    });
+
+    return container;
 }
 
 module.exports = {
