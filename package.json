@@ -1,0 +1,38 @@
+{
+    "name": "sg-lite",
+    "version": "1.0.0",
+    "description": "A smaller, lighter Signet for client-side systems or where the full library is too much",
+    "main": "index.js",
+    "scripts": {
+        "test": "node ./node_modules/nanocommit/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/signetjs/sg-lite.git"
+    },
+    "keywords": [
+        "signet",
+        "types",
+        "assertions",
+        "assert",
+        "tools"
+    ],
+    "author": "Chris Stead",
+    "license": "MPL-2.0",
+    "bugs": {
+        "url": "https://github.com/signetjs/sg-lite/issues"
+    },
+    "homepage": "https://github.com/signetjs/sg-lite#readme",
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "chai-verify": "^1.3.0",
+        "mocha": "^6.2.0",
+        "nanocommit": "^1.2.0"
+    },
+    "nanocommit": {
+        "testCommand": "node ./node_modules/mocha/bin/mocha ./tests/**/*.test.js",
+        "defaultCommandArgs": null,
+        "blindCommit": false,
+        "commitMessage": null
+    }
+}
