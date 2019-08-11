@@ -24,26 +24,14 @@
             typeUtilities
         }) {
 
-            console.log(typeRegistryFactory);
-
             const typeRegistry = typeRegistryFactory();
             const typeRegistrar = typeRegistrarFactory(typeRegistry);
 
             coreTypeBuilder.buildCoreTypes(typeRegistrar);
 
-            function subtype(parentTypename) {
-                return function (subtypeName, typeFunction) {
-                    typeRegistrar.defineSubtype(
-                        parentTypename,
-                        subtypeName,
-                        typeFunction
-                    );
-                }
-            }
-
             return {
                 isTypeOf: typeUtilities.isTypeOf,
-                subtype,
+                subtype: typeRegistrar.subtype,
                 types: typeRegistry.getTypeObject()
             };
         }

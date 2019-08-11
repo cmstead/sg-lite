@@ -26,8 +26,8 @@
 
             function defineCoreTypes(typeRegistrar) {
                 return function defineCoreTypeByName(typeName) {
-                    typeRegistrar.defineSubtype(
-                        'any',
+                    typeRegistrar.subtype('any')
+                    (
                         typeName,
                         defineTypeByName(typeName)
                     );
@@ -37,7 +37,7 @@
             function buildCoreTypes(typeRegistrar) {
                 const defineCoreTypeByName = defineCoreTypes(typeRegistrar);
 
-                typeRegistrar.defineType('any', any);
+                typeRegistrar.define('any', any);
 
                 defineCoreTypeByName('number');
                 defineCoreTypeByName('string');

@@ -54,9 +54,19 @@
                     }
                 }
 
+                function subtype(parentTypename) {
+                    return function (subtypeName, typeFunction) {
+                        defineSubtype(
+                            parentTypename,
+                            subtypeName,
+                            typeFunction
+                        );
+                    }
+                }
+
                 return {
-                    defineSubtype,
-                    defineType
+                    define: defineType,
+                    subtype
                 };
             };
         }
