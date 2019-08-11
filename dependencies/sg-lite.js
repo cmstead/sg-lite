@@ -13,13 +13,15 @@
         sglite.dependencies = [
             'coreTypeBuilder',
             'typeRegistryFactory',
-            'typeRegistrarFactory'
+            'typeRegistrarFactory',
+            'typeUtilities'
         ];
 
         function sglite({
             coreTypeBuilder,
             typeRegistryFactory,
-            typeRegistrarFactory
+            typeRegistrarFactory,
+            typeUtilities
         }) {
 
             console.log(typeRegistryFactory);
@@ -28,16 +30,6 @@
             const typeRegistrar = typeRegistrarFactory(typeRegistry);
 
             coreTypeBuilder.buildCoreTypes(typeRegistrar);
-
-            function checkTypeOf(type, value) {
-                return type(value);
-            }
-
-            function isTypeOf(type) {
-                return function typeCheck(value) {
-                    return checkTypeOf(type, value);
-                }
-            }
 
             function subtype(parentTypename) {
                 return function (subtypeName, typeFunction) {
@@ -50,7 +42,7 @@
             }
 
             return {
-                isTypeOf,
+                isTypeOf: typeUtilities.isTypeOf,
                 subtype,
                 types: typeRegistry.getTypeObject()
             };
