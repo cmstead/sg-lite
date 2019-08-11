@@ -46,6 +46,13 @@ describe("SG-Lite core functionality", function(){
             const valueTest = sglite.isTypeOf(types.nonemptyString)(null);
             assert.isFalse(valueTest, 'Value was not properly checked to be a string or nonemptyString');
         });
+
+        it('throws an error if type function arity does not match parent arity', function () {
+            const defineSubtype = () =>
+                sglite.subtype('string')('badStringChild', function (one, two) {});
+            
+            assert.throws(defineSubtype, '', 'Arity check failed to throw');
+        });
     });
 
 });

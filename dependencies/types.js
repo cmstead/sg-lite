@@ -15,9 +15,13 @@
         function types({}) {
 
             function checkTypeByName(typeName) {
-                return function(value) {
+                function typeCheck(value) {
                     return typeof value === typeName;
                 };
+
+                typeCheck.arity = 1;
+
+                return typeCheck;
             }
 
             return {
