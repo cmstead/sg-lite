@@ -26,4 +26,15 @@ describe("SG-Lite core functionality", function(){
 
     });
 
+    describe('subtype', function () {
+        it('defines a new type as a subtype of another', function () {
+            sglite.subtype('number')('positiveNumber', function(value) {
+                return !(value < 0);
+            });
+
+            const valueTest = sglite.isTypeOf(sglite.types.positiveNumber)(-1);
+            assert.isFalse(valueTest, 'Value was not properly verified against positiveNumber');
+        });
+    });
+
 });

@@ -17,7 +17,7 @@
             function checkTypeByName(typeName) {
                 return function(value) {
                     return typeof value === typeName;
-                }
+                };
             }
 
             return {

@@ -27,8 +27,15 @@
                 }
             }
 
+            function subtype(typeName) {
+                return function (newTypeName, typeFunction) {
+                    types[newTypeName] = typeFunction;
+                };
+            }
+
             return {
                 isTypeOf,
+                subtype,
                 types
             };
         }
