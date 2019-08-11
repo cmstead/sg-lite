@@ -10,12 +10,24 @@
     }
 })(
     (function () {
-        sglite.dependencies = ['types'];
+        sglite.dependencies = [
+            'coreTypeBuilder',
+            'typeRegistryFactory',
+            'typeRegistrarFactory'
+        ];
 
         function sglite({
-            types
+            coreTypeBuilder,
+            typeRegistryFactory,
+            typeRegistrarFactory
         }) {
 
+            console.log(typeRegistryFactory);
+
+            const typeRegistry = typeRegistryFactory();
+            const typeRegistrar = typeRegistrarFactory(typeRegistry);
+
+            coreTypeBuilder.buildCoreTypes(typeRegistrar);
 
             function checkTypeOf(type, value) {
                 return type(value);
@@ -27,37 +39,20 @@
                 }
             }
 
-            function checkArity(type, typeName, subtype, subtypeName) {
-                if(type.arity !== subtype.length) {
-                    const errorMessage = `Cannot register subtype ${subtypeName}.`
-                        + ` Type arity must match parent.`
-                        + ` ${typeName} has an arity of ${type.arity},`
-                        + ` ${subtypeName} has an arity of ${subtype.length}`
-                    throw new Error(errorMessage);
-                }
-            }
-
-            function buildSubtype(parentType, typeFunction) {
-                return function (value) {
-                    return checkTypeOf(parentType, value)
-                        && typeFunction(value);
-                }
-            }
-
-            function subtype(typeName) {
-                const parentType = types[typeName];
-
+            function subtype(parentTypename) {
                 return function (subtypeName, typeFunction) {
-                    checkArity(parentType, typeName, typeFunction, subtypeName);
-
-                    types[subtypeName] = buildSubtype(parentType, typeFunction);
-                };
+                    typeRegistrar.defineSubtype(
+                        parentTypename,
+                        subtypeName,
+                        typeFunction
+                    );
+                }
             }
 
             return {
                 isTypeOf,
                 subtype,
-                types
+                types: typeRegistry.getTypeObject()
             };
         }
 
