@@ -18,6 +18,12 @@ describe("SG-Lite core functionality", function(){
             assert.isTrue(anyCheckResult, 'Any check failed to return true');
         });
 
+        it('returns false when called with number and a value which is not a number', function () {
+            const numberCheckResult = sglite.isTypeOf(sglite.types.number)('not a number');
+
+            assert.isFalse(numberCheckResult, 'Number check passed when it should have failed');
+        });
+
     });
 
 });
