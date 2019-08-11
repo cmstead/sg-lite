@@ -15,12 +15,17 @@
         function typeRegistrarFactory({ }) {
 
             return function (typeRegistry) {
+                function buildErrorMessage(type, typeName, subtype, subtypeName) {
+                    return `Cannot register subtype ${subtypeName}.`
+                        + ` Type arity must match parent.`
+                        + ` ${typeName} has an arity of ${type.arity},`
+                        + ` ${subtypeName} has an arity of ${subtype.length}`;
+                }
+
                 function checkArity(type, typeName, subtype, subtypeName) {
                     if (type.arity !== subtype.length) {
-                        const errorMessage = `Cannot register subtype ${subtypeName}.`
-                            + ` Type arity must match parent.`
-                            + ` ${typeName} has an arity of ${type.arity},`
-                            + ` ${subtypeName} has an arity of ${subtype.length}`
+                        const errorMessage = buildErrorMessage(type, typeName, subtype, subtypeName);
+
                         throw new Error(errorMessage);
                     }
                 }
@@ -37,7 +42,7 @@
                     subtypeFunction
                 ) {
                     const parentType = typeRegistry.getType(parentTypeName);
-                    
+
                     checkArity(parentType, subtypeName, subtypeFunction, subtypeName);
 
                     const subtype = buildSubtype(parentType, subtypeFunction);
