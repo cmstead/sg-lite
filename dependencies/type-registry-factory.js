@@ -22,7 +22,10 @@
                     return types;
                 }
 
-                function register(typeName, typeFunction) {
+                function register(typeName, typeFunction, arity=1) {
+                    typeFunction.typeName = typeName;
+                    typeFunction.arity = arity;
+                    
                     types[typeName] = typeFunction;
                 }
 

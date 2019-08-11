@@ -26,9 +26,9 @@
                 }
 
                 function defineType(typeName, typeFunction) {
-                    typeFunction.arity = typeFunction.length;
+                    const arity = typeFunction.length;
 
-                    typeRegistry.register(typeName, typeFunction);
+                    typeRegistry.register(typeName, typeFunction, arity);
                 }
 
                 function defineSubtype(
@@ -41,10 +41,9 @@
                     checkArity(parentType, subtypeName, subtypeFunction, subtypeName);
 
                     const subtype = buildSubtype(parentType, subtypeFunction);
+                    const arity = subtypeFunction.length;
 
-                    subtype.arity = subtypeFunction.length;
-
-                    typeRegistry.register(subtypeName, subtype);
+                    typeRegistry.register(subtypeName, subtype, arity);
                 }
 
                 function buildSubtype(parentType, typeFunction) {
