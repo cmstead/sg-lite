@@ -27,9 +27,15 @@
                 }
             }
 
+            function buildSubtype(typeName, typeFunction) {
+                return function (value) {
+                    return types[typeName](value) && typeFunction(value);
+                }
+            }
+
             function subtype(typeName) {
-                return function (newTypeName, typeFunction) {
-                    types[newTypeName] = typeFunction;
+                return function (subtypeName, typeFunction) {
+                    types[subtypeName] = buildSubtype(typeName, typeFunction);
                 };
             }
 

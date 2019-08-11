@@ -32,8 +32,17 @@ describe("SG-Lite core functionality", function(){
                 return !(value < 0);
             });
 
-            const valueTest = sglite.isTypeOf(sglite.types.positiveNumber)(-1);
-            assert.isFalse(valueTest, 'Value was not properly verified against positiveNumber');
+            const valueTest = sglite.isTypeOf(sglite.types.positiveNumber)(1);
+            assert.isTrue(valueTest, 'Value was not properly verified against positiveNumber');
+        });
+
+        it('requires value adheres to parent type', function () {
+            sglite.subtype('string')('nonemptyString', function (value) {
+                return value.length > 0;
+            });
+
+            const valueTest = sglite.isTypeOf(sglite.types.nonemptyString)(null);
+            assert.isFalse(valueTest, 'Value was not properly checked to be a string or nonemptyString');
         });
     });
 

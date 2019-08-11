@@ -22,7 +22,8 @@
 
             return {
                 any: () => true,
-                number: checkTypeByName('number')
+                number: checkTypeByName('number'),
+                string: checkTypeByName('string')
             };
         }
 
