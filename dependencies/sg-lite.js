@@ -30,6 +30,7 @@
             coreTypeBuilder.buildCoreTypes(typeRegistrar);
 
             return {
+                define: typeRegistrar.define,
                 isTypeOf: typeUtilities.isTypeOf,
                 subtype: typeRegistrar.subtype,
                 types: typeRegistry.getTypeObject()

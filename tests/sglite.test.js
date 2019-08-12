@@ -28,6 +28,20 @@ describe("SG-Lite core functionality", function(){
 
     });
 
+    describe('define', function () {
+
+        it('defines a new type', function () {
+            sglite.define('testThing', function(value){
+                return true
+            });
+
+            const verificationResult = sglite.isTypeOf(types.testThing)('foo');
+
+            assert.isTrue(verificationResult);
+        });
+
+    });
+
     describe('subtype', function () {
         it('defines a new type as a subtype of another', function () {
             sglite.subtype('number')('positiveNumber', function(value) {
