@@ -33,9 +33,7 @@
                 function wrapType(typeFunction) {
                     if (typeFunction.length > 1) {
                         function wrappedType(...args) {
-                            return function (value) {
-                                return typeFunction(value, ...args);
-                            }
+                            return (value) => typeFunction(value, ...args);
                         }
 
                         wrappedType.arity = typeFunction.length;
