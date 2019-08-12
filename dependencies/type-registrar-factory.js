@@ -30,10 +30,26 @@
                     }
                 }
 
+                function wrapType(typeFunction) {
+                    if (typeFunction.length > 1) {
+                        function wrappedType(...args) {
+                            return function (value) {
+                                return typeFunction(value, ...args);
+                            }
+                        }
+
+                        wrappedType.arity = typeFunction.length;
+
+                        return wrappedType;
+                    } else {
+                        return typeFunction;
+                    }
+                }
+
                 function defineType(typeName, typeFunction) {
                     const arity = typeFunction.length;
 
-                    typeRegistry.register(typeName, typeFunction, arity);
+                    typeRegistry.register(typeName, wrapType(typeFunction), arity);
                 }
 
                 function defineSubtype(

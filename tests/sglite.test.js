@@ -40,6 +40,16 @@ describe("SG-Lite core functionality", function(){
             assert.isTrue(verificationResult);
         });
 
+        it('allows definition of types with extra options', function () {
+            sglite.define('typeWithOptions', function(value, option){
+                return value === option;
+            });
+
+            const verificationResult = sglite.isTypeOf(types.typeWithOptions('bar'))('bar');
+
+            assert.isTrue(verificationResult);
+        });
+
     });
 
     describe('subtype', function () {

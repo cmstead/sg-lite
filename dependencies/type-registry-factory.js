@@ -12,7 +12,7 @@
     (function () {
         typeRegistryFactory.dependencies = [];
 
-        function typeRegistryFactory({}) {
+        function typeRegistryFactory({ }) {
 
             return function () {
 
@@ -22,14 +22,17 @@
                     return types;
                 }
 
-                function register(typeName, typeFunction, arity=1) {
+                function register(typeName, typeFunction, arity = 1) {
                     typeFunction.typeName = typeName;
-                    typeFunction.arity = arity;
-                    
+
+                    if (typeof typeFunction.arity === 'undefined') {
+                        typeFunction.arity = arity;
+                    }
+
                     types[typeName] = typeFunction;
                 }
 
-                function getType (typeName) {
+                function getType(typeName) {
                     return types[typeName];
                 }
 
