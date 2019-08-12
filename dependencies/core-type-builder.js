@@ -1,10 +1,6 @@
 (function (moduleFactory) {
     if (typeof dject !== 'undefined') {
-        dject.register(
-            moduleFactory,
-            moduleFactory.name,
-            moduleFactory.dependencies
-        );
+        dject.register(moduleFactory);
     } else {
         module.exports = moduleFactory;
     }
