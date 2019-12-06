@@ -68,6 +68,12 @@ describe("SG-Lite core functionality", function(){
             assert.isFalse(stringCheckResult, 'BigInt check passed when it should have failed');
         });
 
+        it('returns false when called with symbol and a value which is not a symbol', function () {
+            const stringCheckResult = sglite.isTypeOf(types.symbol)(null);
+
+            assert.isFalse(stringCheckResult, 'Symbol check passed when it should have failed');
+        });
+
     });
 
 });

@@ -27,6 +27,7 @@
             registrar.register('undefined', checkTypeOf('undefined'));
             registrar.register('boolean', checkTypeOf('boolean'));
             registrar.register('bigint', checkTypeOf('bigint'));
+            registrar.register('symbol', checkTypeOf('symbol'));
             
             registrar.register('null', (value) => value === null);
             registrar.register('array', (value) => Array.isArray(value));
