@@ -20,58 +20,76 @@ describe("SG-Lite core functionality", function(){
             assert.isTrue(anyCheckResult, 'Any check failed to return true');
         });
 
-        it('returns false when called with number and a value which is not a number', function () {
-            const numberCheckResult = sglite.isTypeOf(types.number)('not a number');
+        it('when called with different values, number check resolves correctly', function () {
+            const numberCheckResultTrue = sglite.isTypeOf(types.number)(1234);
+            const numberCheckResultFalse = sglite.isTypeOf(types.number)('not a number');
 
-            assert.isFalse(numberCheckResult, 'Number check passed when it should have failed');
+            assert.isTrue(numberCheckResultTrue);
+            assert.isFalse(numberCheckResultFalse);
         });
 
-        it('returns false when called with string and a value which is not a string', function () {
-            const stringCheckResult = sglite.isTypeOf(types.string)(null);
+        it('when called with different values, string check resolves correctly', function () {
+            const stringCheckResultTrue = sglite.isTypeOf(types.string)('I am a string');
+            const stringCheckResultFalse = sglite.isTypeOf(types.string)(null);
 
-            assert.isFalse(stringCheckResult, 'String check passed when it should have failed');
+            assert.isTrue(stringCheckResultTrue);
+            assert.isFalse(stringCheckResultFalse);
         });
 
-        it('returns false when called with object and a value which is not an object', function () {
-            const stringCheckResult = sglite.isTypeOf(types.object)(undefined);
+        it('when called with different values, object check resolves correctly', function () {
+            const stringCheckResultTrue = sglite.isTypeOf(types.object)({});
+            const stringCheckResultFalse = sglite.isTypeOf(types.object)(undefined);
 
-            assert.isFalse(stringCheckResult, 'Object check passed when it should have failed');
+            assert.isTrue(stringCheckResultTrue);
+            assert.isFalse(stringCheckResultFalse);
         });
 
-        it('returns false when called with null and a value which is not null', function () {
-            const stringCheckResult = sglite.isTypeOf(types.null)(undefined);
+        it('when called with different values, null check resolves correctly', function () {
+            const stringCheckResultTrue = sglite.isTypeOf(types.null)(null);
+            const stringCheckResultFalse = sglite.isTypeOf(types.null)(undefined);
 
-            assert.isFalse(stringCheckResult, 'Null check passed when it should have failed');
+            assert.isTrue(stringCheckResultTrue);
+            assert.isFalse(stringCheckResultFalse);
         });
 
-        it('returns false when called with undefined and a value which is not undefined', function () {
-            const stringCheckResult = sglite.isTypeOf(types.undefined)(null);
+        it('when called with different values, undefined check resolves correctly', function () {
+            const checkResultTrue = sglite.isTypeOf(types.undefined)(undefined);
+            const checkResultFalse = sglite.isTypeOf(types.undefined)(null);
 
-            assert.isFalse(stringCheckResult, 'Undefined check passed when it should have failed');
+            assert.isTrue(checkResultTrue);
+            assert.isFalse(checkResultFalse);
         });
 
-        it('returns false when called with array and a value which is not an array', function () {
-            const stringCheckResult = sglite.isTypeOf(types.array)(null);
+        it('when called with different values, array check resolves correctly', function () {
+            const checkResultTrue = sglite.isTypeOf(types.array)([]);
+            const checkResultFalse = sglite.isTypeOf(types.array)(null);
 
-            assert.isFalse(stringCheckResult, 'Array check passed when it should have failed');
+            assert.isTrue(checkResultTrue);
+            assert.isFalse(checkResultFalse);
         });
 
-        it('returns false when called with boolean and a value which is not a boolean', function () {
-            const stringCheckResult = sglite.isTypeOf(types.boolean)(null);
+        it('when called with different values, boolean check resolves correctly', function () {
+            const checkResultTrue = sglite.isTypeOf(types.boolean)(true);
+            const checkResultFalse = sglite.isTypeOf(types.boolean)(null);
 
-            assert.isFalse(stringCheckResult, 'Boolean check passed when it should have failed');
+            assert.isTrue(checkResultTrue);
+            assert.isFalse(checkResultFalse);
         });
 
-        it('returns false when called with bigint and a value which is not a bigint', function () {
-            const stringCheckResult = sglite.isTypeOf(types.bigint)(null);
+        it('when called with different values, bigint check resolves correctly', function () {
+            const checkResultTrue = sglite.isTypeOf(types.bigint)(53n);
+            const checkResultFalse = sglite.isTypeOf(types.bigint)(null);
 
-            assert.isFalse(stringCheckResult, 'BigInt check passed when it should have failed');
+            assert.isTrue(checkResultTrue);
+            assert.isFalse(checkResultFalse);
         });
 
-        it('returns false when called with symbol and a value which is not a symbol', function () {
-            const stringCheckResult = sglite.isTypeOf(types.symbol)(null);
+        it('when called with different values, symbol check resolves correctly', function () {
+            const checkResultTrue = sglite.isTypeOf(types.symbol)(Symbol('HI'));
+            const checkResultFalse = sglite.isTypeOf(types.symbol)(null);
 
-            assert.isFalse(stringCheckResult, 'Symbol check passed when it should have failed');
+            assert.isTrue(checkResultTrue);
+            assert.isFalse(checkResultFalse);
         });
 
     });
