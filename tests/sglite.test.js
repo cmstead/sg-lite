@@ -50,10 +50,16 @@ describe("SG-Lite core functionality", function(){
             assert.isFalse(stringCheckResult, 'Undefined check passed when it should have failed');
         });
 
-        it('returns false when called with array and a value which is not undefined', function () {
+        it('returns false when called with array and a value which is not an array', function () {
             const stringCheckResult = sglite.isTypeOf(types.array)(null);
 
             assert.isFalse(stringCheckResult, 'Array check passed when it should have failed');
+        });
+
+        it('returns false when called with boolean and a value which is not a boolean', function () {
+            const stringCheckResult = sglite.isTypeOf(types.boolean)(null);
+
+            assert.isFalse(stringCheckResult, 'Boolean check passed when it should have failed');
         });
 
     });

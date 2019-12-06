@@ -24,8 +24,10 @@
             registrar.register('number', checkTypeOf('number'));
             registrar.register('string', checkTypeOf('string'));
             registrar.register('object', checkTypeOf('object'));
+            registrar.register('undefined', checkTypeOf('undefined'));
+            registrar.register('boolean', checkTypeOf('boolean'));
+            
             registrar.register('null', (value) => value === null);
-            registrar.register('undefined', (value) => value === 'undefined');
             registrar.register('array', (value) => Array.isArray(value));
         }
 
