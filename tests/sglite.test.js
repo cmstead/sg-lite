@@ -44,12 +44,6 @@ describe("SG-Lite core functionality", function(){
             assert.isFalse(stringCheckResult, 'Null check passed when it should have failed');
         });
 
-        it('returns false when called with null and a value which is not null', function () {
-            const stringCheckResult = sglite.isTypeOf(types.null)(undefined);
-
-            assert.isFalse(stringCheckResult, 'Null check passed when it should have failed');
-        });
-
         it('returns false when called with undefined and a value which is not undefined', function () {
             const stringCheckResult = sglite.isTypeOf(types.undefined)(null);
 
