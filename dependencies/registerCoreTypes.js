@@ -17,7 +17,6 @@
             registrar.register('any', () => true);
             registrar.register('number', (value) => typeof value === 'number');
             registrar.register('string', (value) => typeof value === 'string');
-
         }
 
         return registerTypes;
