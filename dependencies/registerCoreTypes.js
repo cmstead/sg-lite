@@ -24,6 +24,7 @@
             registrar.register('number', checkTypeOf('number'));
             registrar.register('string', checkTypeOf('string'));
             registrar.register('object', checkTypeOf('object'));
+            registrar.register('null', (value) => value === null);
         }
 
         return registerTypes;
