@@ -11,35 +11,25 @@
     }
 })(function () {
     const dependencies = [
-        'registryFactory'
+        'registrar'
     ];
 
     function sglite({
-        registryFactory
+        registrar
     }) {
-        let types = {};
-        
-        const registry = registryFactory();
-
-        registry.register('any', () => true);
-        registry.register('number', (value) => typeof value === 'number');
-        registry.register('string', (value) => typeof value === 'string');
-
-        Object.defineProperties(types, {
-            any: { get: () => registry.get('any') },
-            number: { get: () => registry.get('number') },
-            string: { get: () => registry.get('string') }
-        });
-
         function isTypeOf(type) {
             return function (value) {
                 return type(value);
             }
         }
 
+        registrar.register('any', () => true);
+        registrar.register('number', (value) => typeof value === 'number');
+        registrar.register('string', (value) => typeof value === 'string');
+
         return {
             isTypeOf: isTypeOf,
-            types: types
+            types: registrar.types
         };
     }
 
