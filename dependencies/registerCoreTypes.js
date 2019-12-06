@@ -14,9 +14,16 @@
 
     function registerCoreTypes({ }) {
         function registerTypes(registrar) {
+            function checkTypeOf(type) {
+                return function (value) {
+                    return typeof value === type;
+                }
+            }
+
             registrar.register('any', () => true);
-            registrar.register('number', (value) => typeof value === 'number');
-            registrar.register('string', (value) => typeof value === 'string');
+            registrar.register('number', checkTypeOf('number'));
+            registrar.register('string', checkTypeOf('string'));
+            registrar.register('object', checkTypeOf('object'));
         }
 
         return registerTypes;

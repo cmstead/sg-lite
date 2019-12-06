@@ -32,6 +32,12 @@ describe("SG-Lite core functionality", function(){
             assert.isFalse(stringCheckResult, 'String check passed when it should have failed');
         });
 
+        it('returns false when called with object and a value which is not an object', function () {
+            const stringCheckResult = sglite.isTypeOf(types.object)(undefined);
+
+            assert.isFalse(stringCheckResult, 'String check passed when it should have failed');
+        });
+
     });
 
 });
