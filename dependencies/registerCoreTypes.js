@@ -26,6 +26,7 @@
             registrar.register('object', checkTypeOf('object'));
             registrar.register('null', (value) => value === null);
             registrar.register('undefined', (value) => value === 'undefined');
+            registrar.register('array', (value) => Array.isArray(value));
         }
 
         return registerTypes;
