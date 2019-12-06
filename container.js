@@ -1,21 +1,21 @@
-const path = require('path');
-const djectContainerFactory = require('dject-core');
-const filepathLoader = require('./node-utils/filepath-loader');
+const fs = require('fs');
+const container = require('dject-core')();
 
-function newContainer() {
-    const container = djectContainerFactory();
-    const dependencyDirectory = path.join(__dirname, 'dependencies');
-    const jsFiles = filepathLoader.loadFilePaths(dependencyDirectory);
+const fileNames = fs
+    .readdirSync('./dependencies')
+    .filter(fileName => !/^\.+$/.test(fileName));
 
-    jsFiles.forEach(function (filePath) {
-        const moduleFactory = require(filePath);
+const modules = fileNames
+    .map(fileName =>
+        require(`./dependencies/${fileName}`));
 
-        container.register(moduleFactory.name, moduleFactory, moduleFactory.dependencies);
-    });
+modules
+    .filter(moduleValue => typeof moduleValue === 'function')
+    .map(moduleValue => 
+        container.register(
+            moduleValue.name, 
+            moduleValue,
+            moduleValue.dependencies
+        ));
 
-    return container;
-}
-
-module.exports = {
-    new: newContainer
-};
+module.exports = container;

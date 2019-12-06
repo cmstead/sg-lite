@@ -4,7 +4,7 @@
     "description": "A smaller, lighter Signet for client-side systems or where the full library is too much",
     "main": "index.js",
     "scripts": {
-        "test": "node ./node_modules/nanocommit/"
+        "test": "nanocommit"
     },
     "repository": {
         "type": "git",
@@ -31,9 +31,12 @@
     },
     "nanocommit": {
         "testCommand": "node ./node_modules/mocha/bin/mocha ./tests/**/*.test.js",
+        "blindCommit": true,
+        "annotations": "nanocommit",
+        "watchFiles": [],
         "defaultCommandArgs": null,
-        "blindCommit": false,
-        "commitMessage": null
+        "commitMessage": null,
+        "customAnnotations": null
     },
     "dependencies": {
         "dject-core": "^1.2.1"

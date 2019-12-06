@@ -1,8 +1,7 @@
-const containerFactory = require('./container');
+const container = require('./container');
 
 function sgliteFactory() {
-    return containerFactory
-        .new()
+    return container
         .buildWithObject('sglite');
 }
 
