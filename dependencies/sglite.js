@@ -22,13 +22,13 @@
         const registry = registryFactory();
 
         registry.register('any', () => true);
-        registry.register('number', (value) => {
-            return typeof value === 'number';
-        });
+        registry.register('number', (value) => typeof value === 'number');
+        registry.register('string', (value) => typeof value === 'string');
 
         Object.defineProperties(types, {
             any: { get: () => registry.get('any') },
-            number: { get: () => registry.get('number') }
+            number: { get: () => registry.get('number') },
+            string: { get: () => registry.get('string') }
         });
 
         function isTypeOf(type) {

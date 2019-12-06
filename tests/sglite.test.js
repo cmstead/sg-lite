@@ -26,6 +26,12 @@ describe("SG-Lite core functionality", function(){
             assert.isFalse(numberCheckResult, 'Number check passed when it should have failed');
         });
 
+        it('returns false when called with string and a value which is not a string', function () {
+            const stringCheckResult = sglite.isTypeOf(types.string)(null);
+
+            assert.isFalse(stringCheckResult, 'String check passed when it should have failed');
+        });
+
     });
 
 });
