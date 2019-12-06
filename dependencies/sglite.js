@@ -11,11 +11,13 @@
     }
 })(function () {
     const dependencies = [
-        'registrar'
+        'registrar',
+        'registerCoreTypes'
     ];
 
     function sglite({
-        registrar
+        registrar,
+        registerCoreTypes
     }) {
         function isTypeOf(type) {
             return function (value) {
@@ -23,9 +25,7 @@
             }
         }
 
-        registrar.register('any', () => true);
-        registrar.register('number', (value) => typeof value === 'number');
-        registrar.register('string', (value) => typeof value === 'string');
+        registerCoreTypes(registrar);
 
         return {
             isTypeOf: isTypeOf,
