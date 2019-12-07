@@ -47,7 +47,7 @@
                         && eachMatches(value, type);
                 }
             }
-            registrar.register('array', isArrayOf);
+            registrar.register('array', isArrayOf, ['memberType']);
         }
 
         return registerTypes;

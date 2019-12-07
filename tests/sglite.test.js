@@ -79,26 +79,35 @@ describe("SG-Lite core functionality", function () {
 
             describe("Array", function () {
 
-                let arrayOf, any, sglite;
+                let arrayOf, any, sglite, types;
 
                 beforeEach(function () {
                     sglite = sgliteFactory();
                     types = sglite.types;
 
                     arrayOf = types.array;
-                    any = types.any;
                 });
 
                 it('when called with empty array, array(any) returns true', function () {
-                    const checkResultTrue = sglite.isTypeOf(arrayOf(any))([]);
+                    const checkResultTrue = sglite.isTypeOf(arrayOf(types.any))([]);
 
                     assert.isTrue(checkResultTrue);
                 });
 
                 it('when called with a non-array, array(any) returns false', function () {
-                    const checkResultTrue = sglite.isTypeOf(arrayOf(any))(null);
+                    const checkResultTrue = sglite.isTypeOf(arrayOf(types.any))(null);
 
                     assert.isFalse(checkResultTrue);
+                });
+
+                it('when called with an array containing a non-number, array(number) returns false', function () {
+                    const checkResultTrue = sglite.isTypeOf(arrayOf(types.number))(null);
+
+                    assert.isFalse(checkResultTrue);
+                });
+
+                it('throws an error when a type is not provided', function() {
+                    assert.throws(() => arrayOf(), `Type 'array' expects arguments 'memberType'`)
                 });
             });
 
