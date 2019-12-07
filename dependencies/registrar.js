@@ -34,19 +34,19 @@
             const parameterList = parameters.join(', ');
             const typeString = `${name}<${parameterList}>`;
 
-            function typeDef(...args) {
-                if(args.length !== parameters.length) {
+            function typeDef(...types) {
+                if(types.length !== parameters.length) {
                     const message = `Type '${name}' expects arguments '${parameterList}'`;
                     throw new Error(message);
                 }
 
-                const argString = args
+                const typeListString = types
                     .map(value => value.typeString)
                     .join(', ');
-                const typeString = `${name}<${argString}>`;
-                const typeDefinition = definition(...args);
 
-                return buildType(typeString, typeDefinition);
+                const typeString = `${name}<${typeListString}>`;
+
+                return buildType(typeString, (value) => definition(value, types));
             }
 
             typeDef.typeString = typeString;

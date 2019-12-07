@@ -28,12 +28,12 @@
             registrar.register('boolean', checkTypeOf('boolean'));
             registrar.register('bigint', checkTypeOf('bigint'));
             registrar.register('symbol', checkTypeOf('symbol'));
-            
+
             registrar.register('null', (value) => value === null);
 
             function eachMatches(values, typeCheck) {
-                for(let i = 0; i < values.length; i++) {
-                    if(typeCheck(values[i]) === false) {
+                for (let i = 0; i < values.length; i++) {
+                    if (typeCheck(values[i]) === false) {
                         return false;
                     }
                 }
@@ -41,12 +41,12 @@
                 return true;
             }
 
-            function isArrayOf(type) {
-                return function (value) {
-                    return Array.isArray(value)
-                        && eachMatches(value, type);
-                }
+            function isArrayOf(value, params) {
+                const { type } = params
+                return Array.isArray(value)
+                    && eachMatches(value, type);
             }
+            
             registrar.register('array', isArrayOf, ['memberType']);
         }
 
