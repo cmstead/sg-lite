@@ -94,6 +94,12 @@ describe("SG-Lite core functionality", function () {
 
                     assert.isTrue(checkResultTrue);
                 });
+
+                it('when called with a non-array, array(any) returns false', function () {
+                    const checkResultTrue = sglite.isTypeOf(arrayOf(any))(null);
+
+                    assert.isFalse(checkResultTrue);
+                });
             });
 
 

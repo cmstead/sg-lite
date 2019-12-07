@@ -33,7 +33,7 @@
 
             function eachMatches(values, typeCheck) {
                 for(let i = 0; i < values.length; i++) {
-                    if(!typeCheck(values[i])) {
+                    if(typeCheck(values[i]) === false) {
                         return false;
                     }
                 }
