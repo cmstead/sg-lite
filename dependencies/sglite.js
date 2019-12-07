@@ -29,6 +29,7 @@
 
         return {
             isTypeOf: isTypeOf,
+            define: registrar.register,
             types: registrar.types
         };
     }

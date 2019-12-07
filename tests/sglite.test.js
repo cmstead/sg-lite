@@ -111,9 +111,9 @@ describe("SG-Lite core functionality", function () {
                 });
 
                 it('has an attached type string as constructed by type calls', function () {
-                    const finalType = arrayOf(arrayOf(types.any));
+                    const finalType = arrayOf(arrayOf(types.number));
 
-                    assert.equal(finalType.typeString, 'array<array<any>>');
+                    assert.equal(finalType.typeString, 'array<array<number>>');
                 });
             });
 
