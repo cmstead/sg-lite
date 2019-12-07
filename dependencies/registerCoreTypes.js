@@ -30,7 +30,24 @@
             registrar.register('symbol', checkTypeOf('symbol'));
             
             registrar.register('null', (value) => value === null);
-            registrar.register('array', (value) => Array.isArray(value));
+
+            function eachMatches(values, typeCheck) {
+                for(let i = 0; i < values.length; i++) {
+                    if(!typeCheck(values[i])) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            function isArrayOf(type) {
+                return function (value) {
+                    return Array.isArray(value)
+                        && eachMatches(value, type);
+                }
+            }
+            registrar.register('array', isArrayOf);
         }
 
         return registerTypes;

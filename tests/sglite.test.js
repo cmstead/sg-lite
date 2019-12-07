@@ -74,15 +74,25 @@ describe("SG-Lite core functionality", function () {
                 assert.isTrue(anyCheckResult, 'Any check failed to return true');
             });
         });
+
         describe("Parameterized Types", function () {
 
             describe("Array", function () {
-                it('when called with different values, array check resolves correctly', function () {
-                    const checkResultTrue = sglite.isTypeOf(types.array)([]);
-                    const checkResultFalse = sglite.isTypeOf(types.array)(null);
+
+                let arrayOf, any, sglite;
+
+                beforeEach(function () {
+                    sglite = sgliteFactory();
+                    types = sglite.types;
+
+                    arrayOf = types.array;
+                    any = types.any;
+                });
+
+                it('when called with empty array, array(any) returns true', function () {
+                    const checkResultTrue = sglite.isTypeOf(arrayOf(any))([]);
 
                     assert.isTrue(checkResultTrue);
-                    assert.isFalse(checkResultFalse);
                 });
             });
 
