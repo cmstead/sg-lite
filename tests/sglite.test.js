@@ -109,6 +109,12 @@ describe("SG-Lite core functionality", function () {
                 it('throws an error when a type is not provided', function() {
                     assert.throws(() => arrayOf(), `Type 'array' expects arguments 'memberType'`)
                 });
+
+                it('has an attached type string as constructed by type calls', function () {
+                    const finalType = arrayOf(arrayOf(types.any));
+
+                    assert.equal(finalType.typeString, 'array<array<any>>');
+                });
             });
 
 
