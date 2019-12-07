@@ -41,8 +41,7 @@
                 return true;
             }
 
-            function isArrayOf(value, params) {
-                const { type } = params
+            function isArrayOf(value, [ type ]) {
                 return Array.isArray(value)
                     && eachMatches(value, type);
             }

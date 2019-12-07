@@ -35,7 +35,7 @@
             const typeString = `${name}<${parameterList}>`;
 
             function typeDef(...types) {
-                if(types.length !== parameters.length) {
+                if(types.length < parameters.length) {
                     const message = `Type '${name}' expects arguments '${parameterList}'`;
                     throw new Error(message);
                 }
