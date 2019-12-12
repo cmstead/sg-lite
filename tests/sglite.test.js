@@ -38,6 +38,14 @@ describe("SG-Lite core functionality", function () {
             assert.equal(resultingValue, initialValue);
         });
 
+        it("throws an error when value does not match expected type", function () {
+            const initialValue = 'This is wrong';
+
+            const testBehavior = () => sglite.verify(types.number)(initialValue);
+
+            assert.throws(testBehavior, `Expected a value of type 'number', but got 'This is wrong' of type 'string'.`);
+        });
+
     });
 
 });

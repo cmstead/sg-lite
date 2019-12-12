@@ -19,15 +19,29 @@
         registrar,
         registerCoreTypes
     }) {
-        function isTypeOf(type) {
+        function isTypeOf(expectedType) {
             return function (value) {
-                return type(value);
+                return expectedType(value);
             }
         }
 
-        function verify() {
+        function buildTypeError(expectedType, value) {
+            return `Expected a value of type ` +
+                `'${expectedType.typeString}', ` +
+                `but got '${value.toString()}' ` +
+                `of type '${typeof value}'.`;
+        }
+
+        function verify(expectedType) {
+            const isCorrectType = isTypeOf(expectedType);
+
             return function (value) {
-                return value;
+                if (isCorrectType(value)) {
+                    return value;
+                } else {
+                    const errorMessage = buildTypeError(expectedType, value);
+                    throw new Error(errorMessage);
+                }
             };
         }
 
