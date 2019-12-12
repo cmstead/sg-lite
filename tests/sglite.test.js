@@ -14,16 +14,28 @@ describe("SG-Lite core functionality", function () {
 
     describe('isTypeOf', function () {
 
-        it("returns true when a value matches expected type", function(){
+        it("returns true when a value matches expected type", function () {
             const result = sglite.isTypeOf(types.string)('This is a string');
 
             assert.isTrue(result);
         });
 
-        it("returns false when a value does not match expected type", function(){
+        it("returns false when a value does not match expected type", function () {
             const result = sglite.isTypeOf(types.string)('This is a string');
 
             assert.isTrue(result);
+        });
+
+    });
+
+    describe("verify", function () {
+
+        it("passes value through when it matches expected type", function () {
+            const initialValue = 'This is correct';
+
+            const resultingValue = sglite.verify(types.string)(initialValue);
+
+            assert.equal(resultingValue, initialValue);
         });
 
     });

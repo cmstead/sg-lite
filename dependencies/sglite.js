@@ -25,12 +25,19 @@
             }
         }
 
+        function verify() {
+            return function (value) {
+                return value;
+            };
+        }
+
         registerCoreTypes(registrar);
 
         return {
-            isTypeOf: isTypeOf,
             define: registrar.register,
-            types: registrar.types
+            isTypeOf: isTypeOf,
+            types: registrar.types,
+            verify: verify
         };
     }
 
