@@ -23,12 +23,6 @@
             return expectedType(value);
         }
 
-        function isTypeOf(expectedType) {
-            return function (value) {
-                return checkType(expectedType, value);
-            }
-        }
-
         function buildTypeError(expectedType, value) {
             return `Expected a value of type ` +
                 `'${expectedType.typeString}', ` +
@@ -45,11 +39,13 @@
             }
         }
 
-        function verify(expectedType) {
-            return function (value) {
-                return verifyValue(expectedType, value)
-            };
-        }
+        const isTypeOf = (expectedType) =>
+            (value) =>
+                checkType(expectedType, value)
+
+        const verify = (expectedType) =>
+            (value) =>
+                verifyValue(expectedType, value)
 
         registerCoreTypes(registrar);
 
