@@ -66,6 +66,20 @@ describe("SG-Lite core functionality", function () {
 
             assert.equal(signedFunction.signature, 'a: string, b: string => string');
         });
+        
+        it("preserves function name in signing", function(){
+            const contract = [
+                [types.string, types.string],
+                [types.string]
+            ];
+
+            const signedFunction = sglite.sign(
+                contract,
+                function concatenate(a, b) { return a + b; }
+            );
+
+            assert.equal(signedFunction.name, 'concatenate');
+        });
 
     });
 });
