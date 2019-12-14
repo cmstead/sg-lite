@@ -19,9 +19,13 @@
         registrar,
         registerCoreTypes
     }) {
+        function checkType(expectedType, value) {
+            return expectedType(value);
+        }
+
         function isTypeOf(expectedType) {
             return function (value) {
-                return expectedType(value);
+                return checkType(expectedType, value);
             }
         }
 
@@ -32,16 +36,18 @@
                 `of type '${typeof value}'.`;
         }
 
-        function verify(expectedType) {
-            const isCorrectType = isTypeOf(expectedType);
+        function verifyValue(expectedType, value) {
+            if (checkType(expectedType, value)) {
+                return value;
+            } else {
+                const errorMessage = buildTypeError(expectedType, value);
+                throw new Error(errorMessage);
+            }
+        }
 
+        function verify(expectedType) {
             return function (value) {
-                if (isCorrectType(value)) {
-                    return value;
-                } else {
-                    const errorMessage = buildTypeError(expectedType, value);
-                    throw new Error(errorMessage);
-                }
+                return verifyValue(expectedType, value)
             };
         }
 
