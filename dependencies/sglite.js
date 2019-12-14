@@ -27,6 +27,7 @@
         return {
             define: registrar.register,
             isTypeOf: verificationSystem.isTypeOf,
+            sign: verificationSystem.sign,
             types: registrar.types,
             verify: verificationSystem.verify
         };

@@ -48,4 +48,24 @@ describe("SG-Lite core functionality", function () {
 
     });
 
+    describe("sign", function(){
+       
+        it("signs a function with a given contract", function(){
+            const contract = [
+                [
+                    ['a', types.string], 
+                    ['b', types.string]
+                ],
+                [types.string]
+            ];
+
+            const signedFunction = sglite.sign(
+                contract,
+                (a, b) =>  a + b
+            );
+
+            assert.equal(signedFunction.signature, 'a: string, b: string => string');
+        });
+
+    });
 });

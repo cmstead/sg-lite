@@ -43,9 +43,40 @@
         const verify = (expectedType) =>
             (value) =>
                 verifyValue(expectedType, value);
+        
+        function buildTypeString(typeDeclaration) {
+            if(typeof typeDeclaration === 'function') {
+                return typeDeclaration.typeString;
+            } else {
+                return typeDeclaration[0] + ': ' + typeDeclaration[1].typeString;
+            }
+        }
+
+        function buildSignatureExpression (contractLine) {
+            return contractLine
+                .map(buildTypeString)
+                .join(', ');
+        }
+
+        function sign(contract, fn) {
+            const signature = contract
+                .map(buildSignatureExpression)
+                .join(' => ');
+            
+            const output = {
+                [fn.name]: (...args) => fn(...args)
+            };
+
+            Object.defineProperty(output[fn.name], 'signature', {
+                value: signature
+            });
+            
+            return output[fn.name];
+        }
 
         return {
             isTypeOf,
+            sign,
             verify
         };
     }
