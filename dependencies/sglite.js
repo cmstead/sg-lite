@@ -30,13 +30,16 @@
                 `of type '${typeof value}'.`;
         }
 
-        function verifyValue(expectedType, value) {
-            if (checkType(expectedType, value)) {
-                return value;
-            } else {
+        function throwOnBadValueType(expectedType, value) {
+            if (!checkType(expectedType, value)) {
                 const errorMessage = buildTypeError(expectedType, value);
                 throw new Error(errorMessage);
             }
+        }
+
+        function verifyValue(expectedType, value) {
+            throwOnBadValueType(expectedType, value)
+            return value;
         }
 
         const isTypeOf = (expectedType) =>
