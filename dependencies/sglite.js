@@ -12,51 +12,23 @@
 })(function () {
     const dependencies = [
         'registrar',
-        'registerCoreTypes'
+        'registerCoreTypes',
+        'verificationSystem'
     ];
 
     function sglite({
         registrar,
-        registerCoreTypes
+        registerCoreTypes,
+        verificationSystem
     }) {
-        function checkType(expectedType, value) {
-            return expectedType(value);
-        }
-
-        function buildTypeError(expectedType, value) {
-            return `Expected a value of type ` +
-                `'${expectedType.typeString}', ` +
-                `but got '${value.toString()}' ` +
-                `of type '${typeof value}'.`;
-        }
-
-        function throwOnBadValueType(expectedType, value) {
-            if (!checkType(expectedType, value)) {
-                const errorMessage = buildTypeError(expectedType, value);
-                throw new Error(errorMessage);
-            }
-        }
-
-        function verifyValue(expectedType, value) {
-            throwOnBadValueType(expectedType, value)
-            return value;
-        }
-
-        const isTypeOf = (expectedType) =>
-            (value) =>
-                checkType(expectedType, value)
-
-        const verify = (expectedType) =>
-            (value) =>
-                verifyValue(expectedType, value)
 
         registerCoreTypes(registrar);
 
         return {
             define: registrar.register,
-            isTypeOf: isTypeOf,
+            isTypeOf: verificationSystem.isTypeOf,
             types: registrar.types,
-            verify: verify
+            verify: verificationSystem.verify
         };
     }
 
