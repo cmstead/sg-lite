@@ -43,35 +43,38 @@
         const verify = (expectedType) =>
             (value) =>
                 verifyValue(expectedType, value);
-        
+
         function buildTypeString(typeDeclaration) {
-            if(typeof typeDeclaration === 'function') {
+            if (typeof typeDeclaration === 'function') {
                 return typeDeclaration.typeString;
             } else {
                 return typeDeclaration[0] + ': ' + typeDeclaration[1].typeString;
             }
         }
 
-        function buildSignatureExpression (contractLine) {
+        function buildSignatureExpression(contractLine) {
             return contractLine
                 .map(buildTypeString)
                 .join(', ');
         }
 
-        function sign(contract, fn) {
+        function attachSignature(contract, fn) {
             const signature = contract
                 .map(buildSignatureExpression)
                 .join(' => ');
-            
+
+            return Object.defineProperty(fn, 'signature', {
+                value: signature
+            });
+
+        }
+
+        function sign(contract, fn) {
             const output = {
                 [fn.name]: (...args) => fn(...args)
             };
 
-            Object.defineProperty(output[fn.name], 'signature', {
-                value: signature
-            });
-            
-            return output[fn.name];
+            return attachSignature(contract, output[fn.name]);
         }
 
         return {
